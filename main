@@ -1,0 +1,67 @@
+#user input
+name = input("Enter name: ")
+commission = float(input("Enter total sales amount: "))
+tenure = int(input("Enter months with company: "))
+salary = float(2000)
+vacation = int(input("Enter vacation days used this month: "))
+
+
+
+def calc_commission():
+    #check comission
+    print("Total Sales:", commission)
+    bonus = 0
+    if commission <= 10000:
+        bonus = commission * 0.00
+    elif commission <= 100000:
+        bonus = commission * 0.02
+    elif commission <= 500000:
+        bonus = commission * 0.15
+    elif commission <= 1000000:
+        bonus = commission * 0.28
+    elif commission > 1000000:
+        bonus = commission * 0.35
+    print("Bonus Commission:", ".................... $",bonus)
+    
+    #check vacation
+    if vacation > 3:
+        bonus_amend = bonus - 200
+    else:
+        bonus_amend = bonus
+    penalty = bonus - bonus_amend
+    print("Vacation Penalty:", ".................... $",penalty)
+    
+    #check tenure
+    if tenure >= 60 and commission > 100000:
+        bonus_tenureAmend = bonus_amend + 1000
+    else:
+        bonus_tenureAmend = bonus_amend
+    tenure_bonus = bonus_tenureAmend - bonus_amend
+    print("Tenure Bonus:",  "........................ $",tenure_bonus)
+    print("Net Pay:", ".................... $", bonus_tenureAmend + salary)
+
+def no_commission():
+    bonus = 0
+    if vacation > 3:
+        bonus_amend = bonus - 200
+    else:
+        bonus_amend = bonus
+    penalty = bonus - bonus_amend
+    print("Vacation Penalty:", ".................... $",penalty)
+    print("Net Pay:", "....................... $",bonus_amend + salary)
+
+    
+
+def check_tenure():
+    if tenure > 3:
+        return calc_commission()
+    elif tenure <= 3:
+        return no_commission()
+    else:
+        print("Insufficient tenure.")
+        
+        
+        
+print(":::::::::PAYSTUB FOR:",name,":::::::::")       
+print("Employee:", name)
+check_tenure()
